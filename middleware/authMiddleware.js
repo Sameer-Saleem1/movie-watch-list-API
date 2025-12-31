@@ -10,8 +10,8 @@ const authMiddleware = async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     token = req.headers.authorization.split(" ")[1];
-  } else if (req.cookies.jwt) {
-    token = req.cookies.jwt;
+  } else if (req.cookies.token) {
+    token = req.cookies.token;
   }
 
   if (!token) {
@@ -23,17 +23,21 @@ const authMiddleware = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await prisma.user.findUnique({ where: { id: decoded.id } });
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+    });
 
     if (!user) {
-      res.status(401).json({ error: "User no longer exist" });
+      return res.status(401).json({
+        error: "User no longer exists",
+      });
     }
 
     req.user = user;
     next();
   } catch (err) {
-    return res.status(500).json({
-      error: "Internal Server Error",
+    return res.status(401).json({
+      error: "Invalid or expired token",
     });
   }
 };
