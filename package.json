@@ -7,7 +7,8 @@
     "seed": "node prisma/seed.js"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "prisma generate"
   },
   "author": "",
   "license": "ISC",
