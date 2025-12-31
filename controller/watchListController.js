@@ -47,8 +47,10 @@ exports.getWatchList = async (req, res) => {
         userId: req.user.id,
       },
       select: {
+        id: true,
         status: true,
         rating: true,
+        notes: true,
         movie: {
           select: {
             title: true,
@@ -68,7 +70,7 @@ exports.getWatchList = async (req, res) => {
 
 exports.deleteWatchListItem = async (req, res) => {
   try {
-    const watchListItem = await prisma.watchListItem.delete({
+    const watchListItem = await prisma.watchListItem.deleteMany({
       where: { id: req.params.id, userId: req.user.id },
     });
     res.status(200).json({
