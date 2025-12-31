@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const movieRoute = require("./routes/movieRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
 const watchListRoutes = require("./routes/watchListRoutes.js");
+// const = require("cor")
 require("dotenv").config();
 
 const app = express();
@@ -11,6 +12,10 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/src/index.html");
+});
 
 app.use("/movies", movieRoute);
 app.use("/auth", authRoutes);

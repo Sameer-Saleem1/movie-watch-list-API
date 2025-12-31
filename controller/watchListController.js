@@ -47,6 +47,8 @@ exports.getWatchList = async (req, res) => {
         userId: req.user.id,
       },
       select: {
+        status: true,
+        rating: true,
         movie: {
           select: {
             title: true,
