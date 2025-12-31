@@ -757,8 +757,23 @@
       }
 
       // Initialize
-      window.addEventListener("load", () => {
-        console.log("Movie Watchlist Manager initialized");
+      window.addEventListener("load", async () => {
+        try {
+          const response = await fetch(`${API_URL}/auth/me`, {
+            credentials: "include",
+          });
+
+          const data = await response.json();
+
+          if (response.ok && data.status === "success") {
+            currentUser = data.data;
+            showMainSection();
+          } else {
+            showAuthSection();
+          }
+        } catch {
+          showAuthSection();
+        }
       });
     </script>
   </body>
