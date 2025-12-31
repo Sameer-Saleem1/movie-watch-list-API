@@ -404,7 +404,7 @@
 
     <script>
       // API Base URL - Update this to match your server URL
-      const API_URL = "http://localhost:3000";
+      const API_URL = "https://movie-watch-list-api.vercel.app/";
 
       let currentUser = null;
       let allMovies = [];
@@ -584,13 +584,10 @@
                         <div class="movie-card">
                             <h3>${movie.title || "Untitled"}</h3>
                             <p><strong>Genre:</strong> ${
-                              movie.genre || "N/A"
+                              movie.genres || "N/A"
                             }</p>
                             <p><strong>Release Year:</strong> ${
                               movie.releaseYear || "N/A"
-                            }</p>
-                            <p><strong>Director:</strong> ${
-                              movie.director || "N/A"
                             }</p>
                             ${
                               movie.description
