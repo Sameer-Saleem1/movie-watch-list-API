@@ -11,6 +11,7 @@ exports.generateToken = (userId, res) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict", //saves from CSRF
+    path: "/",
     maxAge: 1000 * 60 * 60 * 24 * 7, //stored in milliseconds
   });
   return token;
